@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ТИХО — мужской антистресс-набор</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070707;
+    --panel:#111;
+    --panel2:#171717;
+    --text:#f3f1ea;
+    --muted:#aaa49a;
+    --soft:#706b63;
+    --line:rgba(255,255,255,.1);
+    --accent:#d6a95f;
+    --accent2:#ffe0a3;
+    --danger:#ff5d46;
+    --green:#28d56f;
+    --blue:#69a8ff;
+    --radius:24px;
+    --sticky:72px;
+    --font-title:'Unbounded', system-ui, sans-serif;
+    --font:'Manrope', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;background:var(--bg)}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);padding-bottom:var(--sticky);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .page{max-width:1120px;margin:0 auto}
+  .mobile-wrap{max-width:520px;margin:0 auto;background:linear-gradient(180deg,#080808 0%,#0d0d0d 48%,#070707 100%);min-height:100vh;position:relative;box-shadow:0 0 80px rgba(0,0,0,.45)}
+  .nav{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:22px 20px}
+  .logo{font-family:var(--font-title);font-weight:900;letter-spacing:.14em;font-size:18px}
+  .vol{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:7px 10px;background:rgba(0,0,0,.32);backdrop-filter:blur(10px)}
+  .hero{min-height:92vh;position:relative;padding:92px 20px 30px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:radial-gradient(circle at 50% 8%,rgba(214,169,95,.22),transparent 34%),linear-gradient(180deg,#15120d 0%,#080808 58%,#070707 100%)}
+  .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.72)),repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0,rgba(255,255,255,.035) 1px,transparent 1px,transparent 22px);opacity:.9}
+  .hero-media{position:relative;z-index:1;margin:14px auto 24px;width:min(360px,92%);aspect-ratio:4/5;border-radius:34px;padding:16px;background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.16);box-shadow:0 28px 80px rgba(0,0,0,.65)}
+  .product-card{height:100%;border-radius:24px;background:linear-gradient(160deg,#24211b,#0c0c0c 58%,#19120a);border:1px solid rgba(255,255,255,.12);position:relative;overflow:hidden;padding:22px;display:flex;flex-direction:column;justify-content:space-between}
+  .product-card:before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 70% 25%,rgba(255,224,163,.22),transparent 28%),linear-gradient(110deg,transparent 0 43%,rgba(255,255,255,.09) 44%,transparent 46%);transform:rotate(-4deg)}
+  .cover-top,.cover-bottom{position:relative;z-index:1}
+  .cover-kicker{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent2);font-weight:800;margin-bottom:12px}
+  .cover-title{font-family:var(--font-title);font-size:46px;line-height:.9;font-weight:900;letter-spacing:.02em}
+  .cover-mode{font-family:var(--font-title);font-size:13px;text-transform:uppercase;color:var(--accent);letter-spacing:.12em;margin-top:12px}
+  .sketch{position:relative;z-index:1;height:42%;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));display:flex;align-items:center;justify-content:center;margin:16px 0;color:rgba(255,255,255,.72);font-weight:900;letter-spacing:.08em;text-align:center;font-size:13px;line-height:1.35}
+  .sketch svg{position:absolute;inset:22px;width:calc(100% - 44px);height:calc(100% - 44px);opacity:.62}
+  .cover-bottom{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+  .hero-content{position:relative;z-index:2}
+  .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(214,169,95,.42);background:rgba(214,169,95,.12);color:var(--accent2);border-radius:999px;padding:8px 11px;font-size:12px;font-weight:800;margin-bottom:14px}
+  .dot{width:7px;height:7px;background:var(--danger);border-radius:50%;box-shadow:0 0 18px var(--danger)}
+  h1{font-family:var(--font-title);font-size:clamp(34px,9vw,52px);line-height:1.03;margin:0 0 16px;letter-spacing:-.04em}
+  .lead{font-size:17px;line-height:1.48;color:#ddd4c7;margin:0 0 20px;font-weight:600}.lead b{color:#fff}
+  .cta-row{display:grid;gap:10px;margin-top:18px}.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:58px;border-radius:18px;padding:16px 18px;font-weight:900;font-size:14px;border:1px solid transparent;text-align:center;transition:.18s ease}.btn:active{transform:scale(.98)}
+  .btn-main{background:linear-gradient(180deg,#ffe4ad,#d6a95f);color:#15100a;box-shadow:0 18px 40px rgba(214,169,95,.18)}
+  .btn-dark{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);color:#fff}.btn-green{background:rgba(40,213,111,.12);border-color:rgba(40,213,111,.35);color:#69f0a1}.btn-blue{background:rgba(105,168,255,.12);border-color:rgba(105,168,255,.35);color:#9ec6ff}
+  .micro{font-size:12px;color:var(--muted);line-height:1.45;margin-top:12px}.section{padding:54px 20px}.tight{padding-top:28px}.label{font-size:12px;color:var(--accent);font-weight:900;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px}.title{font-family:var(--font-title);font-size:29px;line-height:1.15;margin:0 0 14px;letter-spacing:-.03em}.text{font-size:16px;line-height:1.62;color:var(--muted);margin:0}.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px}.proof{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.proof-card{background:linear-gradient(180deg,#191919,#101010);border:1px solid var(--line);border-radius:20px;padding:18px 14px}.proof-num{font-family:var(--font-title);font-size:30px;font-weight:900;color:var(--accent2);line-height:1}.proof-label{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.35}.pain-list,.plain-list{display:grid;gap:10px;margin-top:20px}.pain-item{display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px}.mark{flex:0 0 24px;height:24px;border-radius:50%;display:grid;place-items:center;background:rgba(255,93,70,.13);color:#ff8b7b;font-weight:900}.pain-item b{display:block;font-size:15px;margin-bottom:4px}.pain-item span{display:block;color:var(--muted);font-size:13px;line-height:1.45}.split{display:grid;gap:12px;margin-top:20px}.mini-card{border-radius:20px;background:var(--panel2);border:1px solid var(--line);padding:18px}.mini-card h3{margin:0 0 8px;font-size:15px}.mini-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}.modes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.mode{min-height:128px;border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,#171717,#101010);padding:16px;display:flex;flex-direction:column;justify-content:space-between}.mode small{color:var(--accent);font-weight:900;letter-spacing:.12em}.mode b{font-family:var(--font-title);font-size:15px;text-transform:uppercase}.mode span{color:var(--muted);font-size:12px;line-height:1.35}.kit{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.kit-item{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px}.kit-item i{font-style:normal;font-size:22px}.kit-item b{display:block;margin:8px 0 4px}.kit-item span{color:var(--muted);font-size:12px;line-height:1.4}.visual-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.visual-ph{aspect-ratio:1;border-radius:20px;border:1px solid rgba(255,255,255,.14);background:linear-gradient(145deg,#201b13,#0d0d0d);display:flex;align-items:center;justify-content:center;text-align:center;color:#cbbda7;font-size:12px;line-height:1.4;padding:14px;font-weight:800}.offer{padding:54px 20px;background:linear-gradient(180deg,#15110a,#090909);border-top:1px solid rgba(214,169,95,.18);border-bottom:1px solid rgba(214,169,95,.18)}.price{font-family:var(--font-title);font-size:58px;font-weight:900;line-height:1;margin:18px 0 8px}.price span{font-size:22px;color:var(--muted)}.urgency{display:inline-flex;gap:8px;align-items:center;padding:9px 12px;border-radius:999px;background:rgba(255,93,70,.13);border:1px solid rgba(255,93,70,.32);color:#ffb1a7;font-size:12px;font-weight:900}.steps{counter-reset:s;display:grid;gap:10px;margin-top:20px}.step{display:flex;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:15px}.step:before{counter-increment:s;content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--accent);color:#120d08;display:grid;place-items:center;font-weight:900;flex:0 0 28px}.step div{font-size:14px;line-height:1.45;color:var(--muted)}.step b{color:#fff}.quote{font-size:15px;line-height:1.55;color:#ddd;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:12px}.footer{padding:34px 20px;text-align:center;color:var(--soft);font-size:12px}.sticky{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(520px,100%);height:var(--sticky);background:rgba(8,8,8,.92);border-top:1px solid var(--line);backdrop-filter:blur(18px);display:grid;grid-template-columns:1fr 1fr 1fr;z-index:50}.sticky a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:900;border-right:1px solid var(--line)}.sticky a:last-child{border-right:0}.sticky small{font-size:18px;line-height:1}.wa{color:#62ee9c}.max{color:#9ec6ff}.call{color:#ffe0a3}
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}.reveal.show{opacity:1;transform:none}
+  @media(min-width:760px){body{padding:28px 0}.mobile-wrap{border-radius:34px;overflow:hidden;border:1px solid var(--line)}.sticky{border-radius:22px 22px 0 0}.hero{min-height:880px}.section{padding-left:32px;padding-right:32px}.offer{padding-left:32px;padding-right:32px}.nav{padding-left:32px;padding-right:32px}.hero{padding-left:32px;padding-right:32px}.hero-content{max-width:430px}.hero-media{width:370px}.title{font-size:34px}}
+</style>
+</head>
+<body>
+<div class="page">
+  <main class="mobile-wrap">
+    <nav class="nav">
+      <div class="logo">ТИХО</div>
+      <div class="vol">Выпуск 01</div>
+    </nav>
+
+    <section class="hero" id="top">
+      <div class="hero-media reveal">
+        <div class="product-card">
+          <div class="cover-top">
+            <div class="cover-kicker">антистресс-набор</div>
+            <div class="cover-title">ТИХО</div>
+            <div class="cover-mode">Режим: Контроль</div>
+          </div>
+          <div class="sketch">
+            <svg viewBox="0 0 220 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 88L69 44L102 70L138 30L198 95" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M44 96H176" stroke="white" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="74" cy="86" r="10" stroke="white" stroke-width="3"/>
+              <circle cx="149" cy="86" r="10" stroke="white" stroke-width="3"/>
+              <path d="M78 43L119 28L133 52" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+            МЕСТО ДЛЯ<br>ТВОЕГО ВИЗУАЛА
+          </div>
+          <div class="cover-bottom">
+            <span>15 минут без телефона</span><span>01/06</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-content reveal">
+        <div class="badge"><span class="dot"></span> идёт сбор первых предзаказов</div>
+        <h1>Ты не отдыхаешь.<br>Ты возвращаешь контроль.</h1>
+        <p class="lead"><b>ТИХО</b> — мужской антистресс-набор в тактической эстетике. 15 минут без телефона. Только руки, бумага и фокус.</p>
+        <div class="cta-row">
+          <a class="btn btn-main" href="#offer">Предзаказать первый выпуск →</a>
+          <a class="btn btn-dark" href="#inside">Что внутри набора</a>
+        </div>
+        <p class="micro">MVP-страница для проверки спроса: нажал — написал “ТИХО” — получил детали.</p>
+      </div>
+    </section>
+
+    <section class="section tight reveal">
+      <div class="panel">
+        <div class="label">Тест спроса</div>
+        <h2 class="title">Сначала проверяем интерес. Потом печатаем тираж.</h2>
+        <p class="text">Никакой магии: лендинг собирает заявки и предзаказы. Эти цифры потом идут в инвест-док как доказательство спроса.</p>
+        <div class="proof">
+          <div class="proof-card"><div class="proof-num">7</div><div class="proof-label">дней теста оффера</div></div>
+          <div class="proof-card"><div class="proof-num">10+</div><div class="proof-label">заявок = уже сигнал</div></div>
+          <div class="proof-card"><div class="proof-num">1 990₽</div><div class="proof-label">цена для теста</div></div>
+          <div class="proof-card"><div class="proof-num">0</div><div class="proof-label">тиража до проверки</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="label">Проблема</div>
+      <h2 class="title">Это не усталость. Это перегруз.</h2>
+      <p class="text">Телефон не отпускает. Голова не выключается. Отдых превращается в ещё один шум.</p>
+      <div class="pain-list">
+        <div class="pain-item"><div class="mark">×</div><div><b>Мандалы не заходят</b><span>Мужчина не хочет покупать продукт, который визуально не про него.</span></div></div>
+        <div class="pain-item"><div class="mark">×</div><div><b>Медитация звучит чуждо</b><span>Не всем подходит “дыши по таймеру и ищи гармонию”.</span></div></div>
+        <div class="pain-item"><div class="mark">×</div><div><b>Стресс есть, продукта нет</b><span>Спрос не отсутствует. Отсутствует нормальная упаковка под мужскую аудиторию.</span></div></div>
+      </div>
+    </section>
+
+    <section class="section reveal" style="background:#0f0f0f">
+      <div class="label">Решение</div>
+      <h2 class="title">ТИХО — это не раскраска. Это ритуал отключения.</h2>
+      <div class="split">
+        <div class="mini-card"><h3>1. Отключил телефон</h3><p>На 15–20 минут убрал главный источник шума.</p></div>
+        <div class="mini-card"><h3>2. Занял руки</h3><p>Детальная графика переключает внимание без лишней философии.</p></div>
+        <div class="mini-card"><h3>3. Вернул фокус</h3><p>После короткого ритуала голова становится тише.</p></div>
+      </div>
+      <div class="cta-row"><a class="btn btn-main" href="#offer">Хочу первый выпуск</a></div>
+    </section>
+
+    <section class="section reveal">
+      <div class="label">Режимы</div>
+      <h2 class="title">Покупают не картинки. Покупают состояние.</h2>
+      <div class="modes">
+        <div class="mode"><small>01</small><b>Контроль</b><span>Тактика, техника, порядок внутри</span></div>
+        <div class="mode"><small>02</small><b>Скорость</b><span>Авто, мото, быстрый сброс</span></div>
+        <div class="mode"><small>03</small><b>Дикость</b><span>Хищники, природа, выживание</span></div>
+        <div class="mode"><small>04</small><b>Сталь</b><span>Механика, детали, фокус</span></div>
+        <div class="mode"><small>05</small><b>Архитектура</b><span>Города, мосты, структура</span></div>
+        <div class="mode"><small>06</small><b>Космос</b><span>Отрыв от реальности</span></div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="inside" style="background:#0f0f0f">
+      <div class="label">Комплект</div>
+      <h2 class="title">Внутри — готовый подарок, не “альбомчик”.</h2>
+      <div class="visual-row">
+        <div class="visual-ph">Здесь поставь<br>обложку “Контроль”</div>
+        <div class="visual-ph">Здесь поставь<br>разворот страниц</div>
+      </div>
+      <div class="kit">
+        <div class="kit-item"><i>📄</i><b>20–30 страниц</b><span>Плотная бумага, односторонняя печать</span></div>
+        <div class="kit-item"><i>✏️</i><b>Карандаши / маркеры</b><span>Чтобы можно было начать сразу</span></div>
+        <div class="kit-item"><i>🎧</i><b>QR-плейлист</b><span>Музыка для режима фокуса</span></div>
+        <div class="kit-item"><i>🎁</i><b>Упаковка</b><span>Премиально. Можно дарить сразу</span></div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="label">Подарок</div>
+      <h2 class="title">Не носки. Не кружка. Не набор “на отвали”.</h2>
+      <p class="text">ТИХО выглядит как подарок с характером. Его не стыдно вручить мужчине, который сам себе такое вряд ли купит — но использовать будет.</p>
+      <div class="quote">“Наконец-то антистресс не в стиле цветочков. Взял бы себе после работы.”</div>
+      <div class="quote">“Это можно подарить мужу, брату или коллеге — выглядит необычно.”</div>
+    </section>
+
+    <section class="offer reveal" id="offer">
+      <div class="urgency"><span class="dot"></span> ограниченный первый выпуск</div>
+      <h2 class="title" style="margin-top:18px">Режим: Контроль</h2>
+      <p class="text">Сбор предзаказов до запуска тиража. Цель — проверить спрос и собрать первую партию без лишнего риска.</p>
+      <div class="price">1 990<span> ₽</span></div>
+      <p class="micro">После заявки отправим детали, визуал выпуска и условия предзаказа.</p>
+      <div class="steps">
+        <div class="step"><div><b>Пишешь “ТИХО”</b><br>в WhatsApp или Max</div></div>
+        <div class="step"><div><b>Получаешь визуал</b><br>первого выпуска и состав набора</div></div>
+        <div class="step"><div><b>Оставляешь предзаказ</b><br>или просто попадаешь в список первых</div></div>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-main" href="https://wa.me/70000000000?text=%D0%A2%D0%98%D0%A5%D0%9E%20%E2%80%94%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B4%D0%B5%D1%82%D0%B0%D0%BB%D0%B8%20%D0%BF%D0%BE%20%D0%BF%D0%B5%D1%80%D0%B2%D0%BE%D0%BC%D1%83%20%D0%B2%D1%8B%D0%BF%D1%83%D1%81%D0%BA%D1%83">Написать “ТИХО” в WhatsApp</a>
+        <a class="btn btn-blue" href="https://max.ru/">Написать в Max</a>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="label">Финал</div>
+      <h2 class="title">Ты не отдыхаешь. Ты возвращаешь контроль.</h2>
+      <p class="text">Первый выпуск — “Контроль”. Если идея цепляет, жми кнопку и забирай место в первом списке.</p>
+      <div class="cta-row">
+        <a class="btn btn-green" href="https://wa.me/70000000000?text=%D0%A2%D0%98%D0%A5%D0%9E">WhatsApp</a>
+        <a class="btn btn-blue" href="https://max.ru/">Max</a>
+        <a class="btn btn-dark" href="tel:+70000000000">Позвонить</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="logo" style="margin-bottom:8px">ТИХО</div>
+      Мужской антистресс-набор · Выпуск 01 · Контроль
+    </footer>
+  </main>
+</div>
+
+<div class="sticky">
+  <a class="wa" href="https://wa.me/70000000000?text=%D0%A2%D0%98%D0%A5%D0%9E"><small>💬</small>WhatsApp</a>
+  <a class="max" href="https://max.ru/"><small>✉️</small>Max</a>
+  <a class="call" href="tel:+70000000000"><small>📞</small>Позвонить</a>
+</div>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){ entry.target.classList.add('show'); io.unobserve(entry.target); }
+    })
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
